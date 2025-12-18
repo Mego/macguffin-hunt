@@ -69,7 +69,7 @@ fn main() {
         .into_records()
         .map(|r| Entry::from(r.unwrap()))
         .collect_vec();
-    let mut output = File::create("index.html").unwrap();
+    let mut output = File::create("stats/index.html").unwrap();
     engine
         .get_template("table")
         .unwrap()

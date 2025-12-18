@@ -2,3 +2,4 @@
 graph.dot
 locs.txt
 src/generate_locs.rs
+stats/index.html
