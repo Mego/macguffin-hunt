@@ -43,6 +43,10 @@ fn get_inputs() -> impl Iterator<Item = FxHashSet<u32>> {
 
 fn main() {
     let cmd_args = env::args().skip(1).collect_vec();
+    let mut best = usize::MAX;
+    let mut worst = 0;
+    let mut total = 0;
+    let mut inputs = 0;
     'inputs_loop: for mut input in get_inputs() {
         let mut cmd = Command::new(&cmd_args[0])
             .args(&cmd_args[1..])
@@ -87,10 +91,17 @@ fn main() {
         }
         if count == input.len() {
             println!("{} => {cost}", input.iter().join(" "));
+
+            best = best.min(count);
+            worst = worst.max(count);
+            total += count;
+            inputs += 1;
         } else {
             eprintln!("subprocess gave up before completing the input");
             cmd.kill().unwrap();
             break 'inputs_loop;
         }
     }
+    let avg = (total as f64) / (inputs as f64);
+    println!("{best},{avg},{worst},{total}");
 }

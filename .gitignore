@@ -1,4 +1,4 @@
 /target
 graph.dot
 locs.txt
-src/generate.rs
+src/generate_locs.rs
